@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -27,10 +24,25 @@ namespace View {
 
             _videosWatched = FileHelper.GetVideoDictionary(_watchedVideosPath);
             _settings = FileHelper.GetSettings(_settingsPath);
-            
-            if (Directory.Exists(_settings["CurrentlyWatchedFolder"])) {
-                LblFileName.Text = _settings["CurrentlyWatchedFolder"];
+
+            OpenDirectory(_settings["CurrentlyWatchedFolder"]);
+        }
+
+        private void OpenDirectory(string path) {
+            if (Directory.Exists(path)) {
+                FileHelper.UpdateSettingsFolder(_settings, path, _settingsPath);
+
+                LblFileName.Text = path;
                 RefreshGrid();
+                RefreshTreeview();
+            }
+        }
+
+        private void RefreshTreeview() {
+            try {
+                TreeviewHelper.ListUpperDirectory(TvFiles, LblFileName.Text);
+            } catch (Exception ex) {
+                ShowError("Error while loading treeview", ex);
             }
         }
 
@@ -83,10 +95,7 @@ namespace View {
                         return;
                     }
 
-                    Process p = new Process();
-                    p.StartInfo.FileName = _settings["VlcPath"];
-                    p.StartInfo.Arguments = $"\"{videoPath}\"";
-                    p.Start();
+                    ProcessHelper.StartProcess(_settings["VlcPath"], videoPath);
                 } else {
                     ShowError("Video was not found.");
                     return;
@@ -107,11 +116,8 @@ namespace View {
             };
 
             if (dialog.ShowDialog() == DialogResult.OK) {
-                LblFileName.Text = dialog.SelectedPath;
 
-                FileHelper.UpdateSettingsFolder(_settings, dialog.SelectedPath, _settingsPath);
-
-                RefreshGrid();
+                OpenDirectory(dialog.SelectedPath);
             }
         }
 
@@ -147,6 +153,13 @@ namespace View {
 
         private void DgFiles_DoubleClick(object sender, EventArgs e) {
             BtnVlc_Click(sender, e);
+        }
+
+        private void TvFiles_DoubleClick(object sender, EventArgs e) {
+            string upper = Directory.GetParent(LblFileName.Text).FullName;
+
+            string path = Path.Combine(upper, TvFiles.SelectedNode.Text);
+            OpenDirectory(path);
         }
 
         #endregion

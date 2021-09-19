@@ -24,7 +24,7 @@ namespace View {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnOpenFile = new System.Windows.Forms.Button();
             this.LblFileName = new System.Windows.Forms.Label();
             this.DgFiles = new System.Windows.Forms.DataGridView();
@@ -33,6 +33,7 @@ namespace View {
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.BtnWatched = new System.Windows.Forms.Button();
             this.BtnUnwatched = new System.Windows.Forms.Button();
+            this.TvFiles = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.DgFiles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@ namespace View {
             // LblFileName
             // 
             this.LblFileName.AutoSize = true;
-            this.LblFileName.Location = new System.Drawing.Point(12, 76);
+            this.LblFileName.Location = new System.Drawing.Point(389, 74);
             this.LblFileName.Name = "LblFileName";
             this.LblFileName.Size = new System.Drawing.Size(14, 20);
             this.LblFileName.TabIndex = 6;
@@ -67,15 +68,15 @@ namespace View {
             this.DgFiles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgFiles.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgFiles.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DgFiles.Location = new System.Drawing.Point(12, 111);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgFiles.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DgFiles.Location = new System.Drawing.Point(393, 111);
             this.DgFiles.MultiSelect = false;
             this.DgFiles.Name = "DgFiles";
             this.DgFiles.ReadOnly = true;
@@ -83,14 +84,14 @@ namespace View {
             this.DgFiles.RowHeadersWidth = 62;
             this.DgFiles.RowTemplate.Height = 28;
             this.DgFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgFiles.Size = new System.Drawing.Size(1124, 951);
+            this.DgFiles.Size = new System.Drawing.Size(1048, 951);
             this.DgFiles.TabIndex = 7;
             this.DgFiles.DoubleClick += new System.EventHandler(this.DgFiles_DoubleClick);
             // 
             // BtnVlc
             // 
             this.BtnVlc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnVlc.Location = new System.Drawing.Point(996, 12);
+            this.BtnVlc.Location = new System.Drawing.Point(1301, 12);
             this.BtnVlc.Name = "BtnVlc";
             this.BtnVlc.Size = new System.Drawing.Size(140, 38);
             this.BtnVlc.TabIndex = 8;
@@ -101,7 +102,7 @@ namespace View {
             // BtnClear
             // 
             this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClear.Location = new System.Drawing.Point(711, 12);
+            this.BtnClear.Location = new System.Drawing.Point(1016, 12);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(121, 38);
             this.BtnClear.TabIndex = 9;
@@ -122,7 +123,7 @@ namespace View {
             // BtnWatched
             // 
             this.BtnWatched.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnWatched.Location = new System.Drawing.Point(512, 12);
+            this.BtnWatched.Location = new System.Drawing.Point(817, 12);
             this.BtnWatched.Name = "BtnWatched";
             this.BtnWatched.Size = new System.Drawing.Size(88, 38);
             this.BtnWatched.TabIndex = 11;
@@ -133,7 +134,7 @@ namespace View {
             // BtnUnwatched
             // 
             this.BtnUnwatched.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnUnwatched.Location = new System.Drawing.Point(606, 12);
+            this.BtnUnwatched.Location = new System.Drawing.Point(911, 12);
             this.BtnUnwatched.Name = "BtnUnwatched";
             this.BtnUnwatched.Size = new System.Drawing.Size(99, 38);
             this.BtnUnwatched.TabIndex = 12;
@@ -141,11 +142,22 @@ namespace View {
             this.BtnUnwatched.UseVisualStyleBackColor = true;
             this.BtnUnwatched.Click += new System.EventHandler(this.BtnUnwatched_Click);
             // 
-            // FrmVlcViewer
+            // TvFiles
+            // 
+            this.TvFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.TvFiles.Location = new System.Drawing.Point(12, 111);
+            this.TvFiles.Name = "TvFiles";
+            this.TvFiles.Size = new System.Drawing.Size(375, 951);
+            this.TvFiles.TabIndex = 13;
+            this.TvFiles.DoubleClick += new System.EventHandler(this.TvFiles_DoubleClick);
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1148, 1074);
+            this.ClientSize = new System.Drawing.Size(1453, 1074);
+            this.Controls.Add(this.TvFiles);
             this.Controls.Add(this.BtnUnwatched);
             this.Controls.Add(this.BtnWatched);
             this.Controls.Add(this.BtnRefresh);
@@ -154,7 +166,7 @@ namespace View {
             this.Controls.Add(this.DgFiles);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnOpenFile);
-            this.Name = "FrmVlcViewer";
+            this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Video Watcher";
             ((System.ComponentModel.ISupportInitialize)(this.DgFiles)).EndInit();
@@ -172,5 +184,6 @@ namespace View {
         private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.Button BtnWatched;
         private System.Windows.Forms.Button BtnUnwatched;
+        private System.Windows.Forms.TreeView TvFiles;
     }
 }

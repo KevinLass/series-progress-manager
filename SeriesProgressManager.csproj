@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\ProcessHelper.cs" />
+    <Compile Include="Helper\TreeviewHelper.cs" />
     <Compile Include="View\enumColumns.cs" />
     <Compile Include="View\enumSettings.cs" />
     <Compile Include="View\FrmMain.cs">
