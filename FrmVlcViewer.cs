@@ -66,25 +66,29 @@ namespace WindowsFormsApp1 {
 
         #region File Operations
         private void LoadFileNames(string path) {
-            String[] files = Directory.GetFiles(path);
+            try {
+                String[] files = Directory.GetFiles(path);
 
-            DataTable table = new DataTable();
+                DataTable table = new DataTable();
 
-            table.Columns.Add("Watched");
+                table.Columns.Add("Watched");
 
-            table.Columns.Add("File Name");
-            foreach(var file in files) {
-                FileInfo info = new FileInfo(file);
-                if (info.Extension == ".mkv" || info.Extension == ".vlc") {
-                    DataRow dr = table.NewRow();
-                    dr["File Name"] = info.Name;
-                    table.Rows.Add(dr);
+                table.Columns.Add("File Name");
+                foreach (var file in files) {
+                    FileInfo info = new FileInfo(file);
+                    if (info.Extension == ".mkv" || info.Extension == ".vlc") {
+                        DataRow dr = table.NewRow();
+                        dr["File Name"] = info.Name;
+                        table.Rows.Add(dr);
+                    }
                 }
+
+                RefreshWatched(table);
+
+                DgFiles.DataSource = table;
+            } catch (Exception ex) {
+                ShowError("Dateien nicht gefunden");
             }
-
-            RefreshWatched(table);
-
-            DgFiles.DataSource = table;
         }
 
         private void UpdateDictionary(string videoName) {
