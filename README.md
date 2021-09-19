@@ -1,7 +1,5 @@
 # series-progress-manager
 
-This program can be used to track the progress of watching a series which is watched with local files.
+This program can be used to track the progress of watching a series consisting of local files.
 
-Note: The code is not refined yet 
-
-![image](https://user-images.githubusercontent.com/36851937/133928498-a4845165-1395-457e-92d5-c58615db801f.png)
+![image](https://user-images.githubusercontent.com/36851937/133933324-c1bf2434-e3c7-48a5-b26e-567ed96b289c.png)
