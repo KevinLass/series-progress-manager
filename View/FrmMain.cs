@@ -10,22 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SeriesProgressManager.Helper;
 
-namespace WindowsFormsApp1 {
-
-    public enum enumColumns {
-        Watched = 1,
-        Filename = 2
-    }
-
-    public enum enumSettings {
-        [Description("VlcPath")]
-        VlcPath = 1,
-        [Description("CurrentlyWatchedFolder")]
-        CurrentlyWatchedFolder = 2
-    }
-
-    public partial class FrmVlcViewer : Form {
+namespace View {
+    public partial class FrmMain : Form {
 
         private Dictionary<string, DateTime> _videosWatched;
         private readonly Dictionary<string, string> _settings;
@@ -34,91 +22,29 @@ namespace WindowsFormsApp1 {
         private readonly string _watchedVideosPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "WatchedVideos.json");
         private readonly string _settingsPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Settings.json");
 
-        public FrmVlcViewer() {
+        public FrmMain() {
             InitializeComponent();
 
-            if (File.Exists(_watchedVideosPath)) {
-                using (StreamReader file = File.OpenText(_watchedVideosPath)) {
-                    JsonSerializer serializer = new JsonSerializer();
-                    _videosWatched = (Dictionary<string, DateTime>)serializer.Deserialize(file, typeof(Dictionary<string, DateTime>));
-                }
-            } else {
-                _videosWatched = new Dictionary<string, DateTime>();
-            }
-
-            if (File.Exists(_settingsPath)) {
-                using (StreamReader file = File.OpenText(_settingsPath)) {
-                    JsonSerializer serializer = new JsonSerializer();
-                    _settings = (Dictionary<string, string>)serializer.Deserialize(file, typeof(Dictionary<string, string>));
-                }
-            } else {
-                _settings = new Dictionary<string, string>() {
-                    {  "CurrentlyWatchedFolder", string.Empty},
-                    {  "VlcPath", @"C:\Program Files\VideoLAN\VLC\vlc.exe"},
-                };
-            }
-
+            _videosWatched = FileHelper.GetVideoDictionary(_watchedVideosPath);
+            _settings = FileHelper.GetSettings(_settingsPath);
+            
             if (Directory.Exists(_settings["CurrentlyWatchedFolder"])) {
                 LblFileName.Text = _settings["CurrentlyWatchedFolder"];
-                LoadFileNames(LblFileName.Text);
+                RefreshGrid();
             }
         }
-
-        #region File Operations
-        private void LoadFileNames(string path) {
-            try {
-                String[] files = Directory.GetFiles(path);
-
-                DataTable table = new DataTable();
-
-                table.Columns.Add("Watched");
-
-                table.Columns.Add("File Name");
-                foreach (var file in files) {
-                    FileInfo info = new FileInfo(file);
-                    if (info.Extension == ".mkv" || info.Extension == ".vlc") {
-                        DataRow dr = table.NewRow();
-                        dr["File Name"] = info.Name;
-                        table.Rows.Add(dr);
-                    }
-                }
-
-                RefreshWatched(table);
-
-                DgFiles.DataSource = table;
-            } catch (Exception ex) {
-                ShowError("Dateien nicht gefunden");
-            }
-        }
-
-        private void UpdateDictionary(string videoName) {
-            if (!string.IsNullOrWhiteSpace(videoName)) {
-                if (_videosWatched.ContainsKey(videoName)) {
-                    _videosWatched[videoName] = DateTime.Now;
-                } else {
-                    _videosWatched.Add(videoName, DateTime.Now);
-                }
-            }
-            SaveDictAsJson();
-            RefreshWatched((DataTable)DgFiles.DataSource);
-        }
-
-
-        private void RemoveFromDictionary(string videoName) {
-            if (_videosWatched.ContainsKey(videoName)) {
-                _videosWatched.Remove(videoName);
-                SaveDictAsJson();
-                RefreshWatched((DataTable)DgFiles.DataSource);
-            }
-        }
-        private void SaveDictAsJson() {
-            var json = JsonConvert.SerializeObject(_videosWatched);
-            File.WriteAllText(_watchedVideosPath, json);
-        }
-
-        #endregion
 
         #region Table Operations
+        private void RefreshGrid() {
+            try {
+                string folder = LblFileName.Text;
+                var table = FileHelper.LoadFileNames(folder);
+                RefreshWatched(table);
+                DgFiles.DataSource = table;
+            } catch (Exception) {
+                ShowError("Files not found");
+            }
+        }
 
         private void RefreshWatched(DataTable table) {
             foreach (DataRow row in table.Rows) {
@@ -132,8 +58,7 @@ namespace WindowsFormsApp1 {
         }
 
         private string GetSelectedName() {
-            if (DgFiles.SelectedRows.Count == 0) {
-                ShowError("No Video selected.");
+            if (DgFiles.SelectedRows.Count != 1) {
                 return null;
             }
 
@@ -160,14 +85,15 @@ namespace WindowsFormsApp1 {
 
                     Process p = new Process();
                     p.StartInfo.FileName = _settings["VlcPath"];
-                    p.StartInfo.Arguments = "\"" + videoPath + "\"";
+                    p.StartInfo.Arguments = $"\"{videoPath}\"";
                     p.Start();
                 } else {
                     ShowError("Video was not found.");
                     return;
                 }
 
-                UpdateDictionary(videoName);
+                FileHelper.UpdateDictionary(_videosWatched, videoName, _watchedVideosPath);
+                RefreshGrid();
 
             } catch (Exception ex) {
                 ShowError(ex.Message);
@@ -183,38 +109,39 @@ namespace WindowsFormsApp1 {
             if (dialog.ShowDialog() == DialogResult.OK) {
                 LblFileName.Text = dialog.SelectedPath;
 
-                _settings["CurrentlyWatchedFolder"] = dialog.SelectedPath;
-                var json = JsonConvert.SerializeObject(_settings);
-                File.WriteAllText(_settingsPath, json);
-                
-                LoadFileNames(LblFileName.Text);
+                FileHelper.UpdateSettingsFolder(_settings, dialog.SelectedPath, _settingsPath);
+
+                RefreshGrid();
             }
         }
 
         private void BtnClear_Click(object sender, EventArgs e) {
-            if(MessageBox.Show("Do you really want to delete all the history?", "Really?",
+            if(MessageBox.Show("Do you really want to delete all history?", "Delete History",
                MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
                 _videosWatched = new Dictionary<string, DateTime>();
-                UpdateDictionary(null);
+                FileHelper.UpdateDictionary(_videosWatched, null, _watchedVideosPath);
+                RefreshGrid();
             }
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e) {
-            LoadFileNames(LblFileName.Text);
+            RefreshGrid();
         }
 
         private void BtnWatched_Click(object sender, EventArgs e) {
             string name = GetSelectedName();
             if (name != null) {
-                UpdateDictionary(name);
+                FileHelper.UpdateDictionary(_videosWatched, name, _watchedVideosPath);
+                RefreshGrid();
             }
         }
 
         private void BtnUnwatched_Click(object sender, EventArgs e) {
             string name = GetSelectedName();
             if (name != null) {
-                RemoveFromDictionary(name);
+                FileHelper.RemoveFromDictionary(_videosWatched, name, _watchedVideosPath);
+                RefreshGrid();
             }
         }
 
@@ -224,9 +151,12 @@ namespace WindowsFormsApp1 {
 
         #endregion
 
-
-        private void ShowError(string message) {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK);
+        private void ShowError(string message, Exception ex = null) {
+            if (ex == null) {
+                MessageBox.Show(message, "Error", MessageBoxButtons.OK);
+            } else {
+                MessageBox.Show($"{message}{Environment.NewLine}{ex}", "Error", MessageBoxButtons.OK);
+            }
         }
     }
 }

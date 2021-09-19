@@ -1,6 +1,6 @@
 ﻿
-namespace WindowsFormsApp1 {
-    partial class FrmVlcViewer {
+namespace View {
+    partial class FrmMain {
         /// <summary>
         /// Required designer variable.
         /// </summary>
