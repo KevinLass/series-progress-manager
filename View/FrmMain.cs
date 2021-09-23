@@ -33,7 +33,7 @@ namespace View {
                 FileHelper.UpdateSettingsFolder(_settings, path, _settingsPath);
 
                 LblFileName.Text = path;
-                RefreshGrid();
+                ReloadGrid();
                 RefreshTreeview();
             }
         }
@@ -47,18 +47,20 @@ namespace View {
         }
 
         #region Table Operations
-        private void RefreshGrid() {
+        private void ReloadGrid() {
             try {
                 string folder = LblFileName.Text;
                 var table = FileHelper.LoadFileNames(folder);
-                RefreshWatched(table);
                 DgFiles.DataSource = table;
+                RefreshWatched();
             } catch (Exception) {
                 ShowError("Files not found");
             }
         }
 
-        private void RefreshWatched(DataTable table) {
+        private void RefreshWatched() {
+            var table = (DataTable) DgFiles.DataSource;
+
             foreach (DataRow row in table.Rows) {
                 string rowData = row["File Name"].ToString();
                 if (_videosWatched.ContainsKey(rowData)) {
@@ -83,30 +85,7 @@ namespace View {
         #region Event Handler
 
         private void BtnVlc_Click(object sender, EventArgs e) {
-            try {
-
-                string videoName = GetSelectedName();
-                string videoPath = $"{LblFileName.Text}\\{videoName}";
-
-                if (File.Exists(videoPath)) {
-
-                    if (!File.Exists(_settings["VlcPath"])) {
-                        ShowError("vlc.exe not found. Make sure that the path in the Settings.json is correct.");
-                        return;
-                    }
-
-                    ProcessHelper.StartProcess(_settings["VlcPath"], videoPath);
-                } else {
-                    ShowError("Video was not found.");
-                    return;
-                }
-
-                FileHelper.UpdateDictionary(_videosWatched, videoName, _watchedVideosPath);
-                RefreshGrid();
-
-            } catch (Exception ex) {
-                ShowError(ex.Message);
-            }
+            StartVideo();   
         }
 
         private void BtnOpenFile_Click(object sender, EventArgs e) {
@@ -127,19 +106,19 @@ namespace View {
 
                 _videosWatched = new Dictionary<string, DateTime>();
                 FileHelper.UpdateDictionary(_videosWatched, null, _watchedVideosPath);
-                RefreshGrid();
+                RefreshWatched();
             }
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e) {
-            RefreshGrid();
+            ReloadGrid();
         }
 
         private void BtnWatched_Click(object sender, EventArgs e) {
             string name = GetSelectedName();
             if (name != null) {
                 FileHelper.UpdateDictionary(_videosWatched, name, _watchedVideosPath);
-                RefreshGrid();
+                RefreshWatched();
             }
         }
 
@@ -147,7 +126,7 @@ namespace View {
             string name = GetSelectedName();
             if (name != null) {
                 FileHelper.RemoveFromDictionary(_videosWatched, name, _watchedVideosPath);
-                RefreshGrid();
+                RefreshWatched();
             }
         }
 
@@ -164,11 +143,47 @@ namespace View {
 
         #endregion
 
+        private void StartVideo() {
+            try {
+                string videoName = GetSelectedName();
+                string videoPath = $"{LblFileName.Text}\\{videoName}";
+
+                if (File.Exists(videoPath)) {
+
+                    if (!File.Exists(_settings["VlcPath"])) {
+                        ShowError("vlc.exe not found. Make sure that the path in the Settings.json is correct.");
+                        return;
+                    }
+
+                    ProcessHelper.StartProcess(_settings["VlcPath"], videoPath);
+                }
+                else {
+                    ShowError("Video was not found.");
+                    return;
+                }
+
+                FileHelper.UpdateDictionary(_videosWatched, videoName, _watchedVideosPath);
+                RefreshWatched();
+
+            }
+            catch (Exception ex) {
+                ShowError(ex.Message);
+            }
+        }
+
         private void ShowError(string message, Exception ex = null) {
             if (ex == null) {
                 MessageBox.Show(message, "Error", MessageBoxButtons.OK);
             } else {
                 MessageBox.Show($"{message}{Environment.NewLine}{ex}", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+
+        private void DgFiles_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                e.Handled = true;
+                StartVideo();
             }
         }
     }

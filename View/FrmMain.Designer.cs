@@ -87,6 +87,7 @@ namespace View {
             this.DgFiles.Size = new System.Drawing.Size(1048, 951);
             this.DgFiles.TabIndex = 7;
             this.DgFiles.DoubleClick += new System.EventHandler(this.DgFiles_DoubleClick);
+            this.DgFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgFiles_KeyDown);
             // 
             // BtnVlc
             // 
