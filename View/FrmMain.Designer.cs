@@ -35,7 +35,12 @@ namespace View {
             this.BtnUnwatched = new System.Windows.Forms.Button();
             this.TvFiles = new System.Windows.Forms.TreeView();
             this.CbRecursiveSearch = new System.Windows.Forms.CheckBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.DgFiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnOpenFile
@@ -63,9 +68,6 @@ namespace View {
             this.DgFiles.AllowUserToDeleteRows = false;
             this.DgFiles.AllowUserToResizeColumns = false;
             this.DgFiles.AllowUserToResizeRows = false;
-            this.DgFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.DgFiles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgFiles.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -77,7 +79,8 @@ namespace View {
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DgFiles.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DgFiles.Location = new System.Drawing.Point(393, 111);
+            this.DgFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgFiles.Location = new System.Drawing.Point(0, 0);
             this.DgFiles.MultiSelect = false;
             this.DgFiles.Name = "DgFiles";
             this.DgFiles.ReadOnly = true;
@@ -85,7 +88,7 @@ namespace View {
             this.DgFiles.RowHeadersWidth = 62;
             this.DgFiles.RowTemplate.Height = 28;
             this.DgFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgFiles.Size = new System.Drawing.Size(1048, 951);
+            this.DgFiles.Size = new System.Drawing.Size(1015, 951);
             this.DgFiles.TabIndex = 7;
             this.DgFiles.DoubleClick += new System.EventHandler(this.DgFiles_DoubleClick);
             this.DgFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgFiles_KeyDown);
@@ -146,11 +149,10 @@ namespace View {
             // 
             // TvFiles
             // 
-            this.TvFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.TvFiles.Location = new System.Drawing.Point(12, 111);
+            this.TvFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TvFiles.Location = new System.Drawing.Point(0, 0);
             this.TvFiles.Name = "TvFiles";
-            this.TvFiles.Size = new System.Drawing.Size(375, 951);
+            this.TvFiles.Size = new System.Drawing.Size(410, 951);
             this.TvFiles.TabIndex = 13;
             this.TvFiles.DoubleClick += new System.EventHandler(this.TvFiles_DoubleClick);
             // 
@@ -164,25 +166,47 @@ namespace View {
             this.CbRecursiveSearch.Text = "recursive";
             this.CbRecursiveSearch.UseVisualStyleBackColor = true;
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(12, 111);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.TvFiles);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.DgFiles);
+            this.splitContainer1.Size = new System.Drawing.Size(1429, 951);
+            this.splitContainer1.SplitterDistance = 410;
+            this.splitContainer1.TabIndex = 15;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1453, 1074);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.CbRecursiveSearch);
-            this.Controls.Add(this.TvFiles);
             this.Controls.Add(this.BtnUnwatched);
             this.Controls.Add(this.BtnWatched);
             this.Controls.Add(this.BtnRefresh);
             this.Controls.Add(this.BtnClear);
             this.Controls.Add(this.BtnVlc);
-            this.Controls.Add(this.DgFiles);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnOpenFile);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Video Watcher";
             ((System.ComponentModel.ISupportInitialize)(this.DgFiles)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,5 +223,6 @@ namespace View {
         private System.Windows.Forms.Button BtnUnwatched;
         private System.Windows.Forms.TreeView TvFiles;
         private System.Windows.Forms.CheckBox CbRecursiveSearch;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
