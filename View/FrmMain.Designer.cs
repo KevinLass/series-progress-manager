@@ -56,7 +56,7 @@ namespace View {
             // LblFileName
             // 
             this.LblFileName.AutoSize = true;
-            this.LblFileName.Location = new System.Drawing.Point(389, 74);
+            this.LblFileName.Location = new System.Drawing.Point(422, 74);
             this.LblFileName.Name = "LblFileName";
             this.LblFileName.Size = new System.Drawing.Size(14, 20);
             this.LblFileName.TabIndex = 6;
