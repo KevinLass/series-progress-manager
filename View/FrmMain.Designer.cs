@@ -36,6 +36,7 @@ namespace View {
             this.TvFiles = new System.Windows.Forms.TreeView();
             this.CbRecursiveSearch = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.TxtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -159,7 +160,7 @@ namespace View {
             // CbRecursiveSearch
             // 
             this.CbRecursiveSearch.AutoSize = true;
-            this.CbRecursiveSearch.Location = new System.Drawing.Point(12, 73);
+            this.CbRecursiveSearch.Location = new System.Drawing.Point(318, 73);
             this.CbRecursiveSearch.Name = "CbRecursiveSearch";
             this.CbRecursiveSearch.Size = new System.Drawing.Size(98, 24);
             this.CbRecursiveSearch.TabIndex = 14;
@@ -185,11 +186,20 @@ namespace View {
             this.splitContainer1.SplitterDistance = 410;
             this.splitContainer1.TabIndex = 15;
             // 
+            // TxtSearch
+            // 
+            this.TxtSearch.Location = new System.Drawing.Point(12, 71);
+            this.TxtSearch.Name = "TxtSearch";
+            this.TxtSearch.Size = new System.Drawing.Size(290, 26);
+            this.TxtSearch.TabIndex = 16;
+            this.TxtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtSearch_KeyDown);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1453, 1074);
+            this.Controls.Add(this.TxtSearch);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.CbRecursiveSearch);
             this.Controls.Add(this.BtnUnwatched);
@@ -224,5 +234,6 @@ namespace View {
         private System.Windows.Forms.TreeView TvFiles;
         private System.Windows.Forms.CheckBox CbRecursiveSearch;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TextBox TxtSearch;
     }
 }

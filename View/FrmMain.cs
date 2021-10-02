@@ -40,7 +40,7 @@ namespace View {
         private void RefreshTreeview() {
             try {
                 TreeviewHelper.ListUpperDirectory(TvFiles, LblFileName.Text, CbRecursiveSearch.Checked);
-            
+                Search();
             } catch (UnauthorizedAccessException ex) {
                 ShowError("Missing rights", ex);
                 TreeviewHelper.ListUpperDirectory(TvFiles, LblFileName.Text, false);
@@ -190,6 +190,20 @@ namespace View {
             if (e.KeyCode == Keys.Enter) {
                 e.Handled = true;
                 StartVideo();
+            }
+        }
+
+        private void TxtSearch_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                Search();
+            }
+        }
+
+        private void Search() {
+            try {
+                TreeviewHelper.SearchRecursive(TvFiles, TvFiles.Nodes[0], TxtSearch.Text);
+            } catch (Exception) {
+                ShowError("Error while searhcing.");
             }
         }
     }

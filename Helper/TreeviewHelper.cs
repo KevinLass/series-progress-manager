@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -77,6 +78,18 @@ namespace SeriesProgressManager.Helper {
                 }
 
                 return Path.Combine(upper, fullPath);
+            }
+        }
+
+        public static void SearchRecursive(TreeView treeView, TreeNode startNode, string text) {
+            while (startNode != null) {
+                bool marked = startNode.Text.ToLower().Contains(text.ToLower()) && !string.IsNullOrWhiteSpace(text);
+                startNode.BackColor = marked ? Color.Yellow : Color.White;
+
+                if (startNode.Nodes.Count > 0) {
+                    SearchRecursive(treeView, startNode.Nodes[0], text);
+                }
+                startNode = startNode.NextNode;
             }
         }
     }
