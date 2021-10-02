@@ -24,7 +24,7 @@ namespace View {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnOpenFile = new System.Windows.Forms.Button();
             this.LblFileName = new System.Windows.Forms.Label();
             this.DgFiles = new System.Windows.Forms.DataGridView();
@@ -34,6 +34,7 @@ namespace View {
             this.BtnWatched = new System.Windows.Forms.Button();
             this.BtnUnwatched = new System.Windows.Forms.Button();
             this.TvFiles = new System.Windows.Forms.TreeView();
+            this.CbRecursiveSearch = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgFiles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,14 +69,14 @@ namespace View {
             this.DgFiles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgFiles.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgFiles.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgFiles.DefaultCellStyle = dataGridViewCellStyle1;
             this.DgFiles.Location = new System.Drawing.Point(393, 111);
             this.DgFiles.MultiSelect = false;
             this.DgFiles.Name = "DgFiles";
@@ -153,11 +154,22 @@ namespace View {
             this.TvFiles.TabIndex = 13;
             this.TvFiles.DoubleClick += new System.EventHandler(this.TvFiles_DoubleClick);
             // 
+            // CbRecursiveSearch
+            // 
+            this.CbRecursiveSearch.AutoSize = true;
+            this.CbRecursiveSearch.Location = new System.Drawing.Point(12, 73);
+            this.CbRecursiveSearch.Name = "CbRecursiveSearch";
+            this.CbRecursiveSearch.Size = new System.Drawing.Size(98, 24);
+            this.CbRecursiveSearch.TabIndex = 14;
+            this.CbRecursiveSearch.Text = "recursive";
+            this.CbRecursiveSearch.UseVisualStyleBackColor = true;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1453, 1074);
+            this.Controls.Add(this.CbRecursiveSearch);
             this.Controls.Add(this.TvFiles);
             this.Controls.Add(this.BtnUnwatched);
             this.Controls.Add(this.BtnWatched);
@@ -186,5 +198,6 @@ namespace View {
         private System.Windows.Forms.Button BtnWatched;
         private System.Windows.Forms.Button BtnUnwatched;
         private System.Windows.Forms.TreeView TvFiles;
+        private System.Windows.Forms.CheckBox CbRecursiveSearch;
     }
 }

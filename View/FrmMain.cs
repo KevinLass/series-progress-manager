@@ -5,7 +5,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SeriesProgressManager.Helper;
 
@@ -40,7 +39,12 @@ namespace View {
 
         private void RefreshTreeview() {
             try {
-                TreeviewHelper.ListUpperDirectory(TvFiles, LblFileName.Text);
+                TreeviewHelper.ListUpperDirectory(TvFiles, LblFileName.Text, CbRecursiveSearch.Checked);
+            
+            } catch (UnauthorizedAccessException ex) {
+                ShowError("Missing rights", ex);
+                TreeviewHelper.ListUpperDirectory(TvFiles, LblFileName.Text, false);
+
             } catch (Exception ex) {
                 ShowError("Error while loading treeview", ex);
             }
@@ -111,6 +115,7 @@ namespace View {
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e) {
+            RefreshTreeview();
             ReloadGrid();
         }
 
@@ -135,10 +140,13 @@ namespace View {
         }
 
         private void TvFiles_DoubleClick(object sender, EventArgs e) {
-            string upper = Directory.GetParent(LblFileName.Text).FullName;
+            try {
+                string curDir = TreeviewHelper.GetDirectoryPath(TvFiles, LblFileName.Text);
+                OpenDirectory(curDir);
 
-            string path = Path.Combine(upper, TvFiles.SelectedNode.Text);
-            OpenDirectory(path);
+            } catch (Exception) {
+                ShowError("Directory could not be opened.");
+            }
         }
 
         #endregion
@@ -156,8 +164,7 @@ namespace View {
                     }
 
                     ProcessHelper.StartProcess(_settings["VlcPath"], videoPath);
-                }
-                else {
+                } else {
                     ShowError("Video was not found.");
                     return;
                 }
@@ -165,8 +172,7 @@ namespace View {
                 FileHelper.UpdateDictionary(_videosWatched, videoName, _watchedVideosPath);
                 RefreshWatched();
 
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 ShowError(ex.Message);
             }
         }
