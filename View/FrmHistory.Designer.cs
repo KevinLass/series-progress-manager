@@ -34,6 +34,9 @@ namespace VideoWatcher.View {
             // 
             this.DgGrid.AllowUserToAddRows = false;
             this.DgGrid.AllowUserToDeleteRows = false;
+            this.DgGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DgGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DgGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -48,6 +51,8 @@ namespace VideoWatcher.View {
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(33, 740);
             this.label1.Name = "label1";
@@ -57,6 +62,8 @@ namespace VideoWatcher.View {
             // 
             // LblPerDay
             // 
+            this.LblPerDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LblPerDay.AutoSize = true;
             this.LblPerDay.Location = new System.Drawing.Point(178, 740);
             this.LblPerDay.Name = "LblPerDay";
