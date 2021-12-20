@@ -54,6 +54,12 @@
     <Compile Include="Helper\TreeviewHelper.cs" />
     <Compile Include="View\enumColumns.cs" />
     <Compile Include="View\enumSettings.cs" />
+    <Compile Include="View\FrmHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmHistory.Designer.cs">
+      <DependentUpon>FrmHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FrmHistory.resx">
+      <DependentUpon>FrmHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>

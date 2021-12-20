@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SeriesProgressManager.Helper;
+using VideoWatcher.View;
 
 namespace View {
     public partial class FrmMain : Form {
@@ -205,6 +206,10 @@ namespace View {
             } catch (Exception) {
                 ShowError("Error while searhcing.");
             }
+        }
+
+        private void BtnHistory_Click(object sender, EventArgs e) {
+            new FrmHistory(_videosWatched).Show();
         }
     }
 }

@@ -37,6 +37,7 @@ namespace View {
             this.CbRecursiveSearch = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.TxtSearch = new System.Windows.Forms.TextBox();
+            this.BtnHistory = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -194,11 +195,22 @@ namespace View {
             this.TxtSearch.TabIndex = 16;
             this.TxtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtSearch_KeyDown);
             // 
+            // BtnHistory
+            // 
+            this.BtnHistory.Location = new System.Drawing.Point(393, 12);
+            this.BtnHistory.Name = "BtnHistory";
+            this.BtnHistory.Size = new System.Drawing.Size(135, 37);
+            this.BtnHistory.TabIndex = 17;
+            this.BtnHistory.Text = "Show History";
+            this.BtnHistory.UseVisualStyleBackColor = true;
+            this.BtnHistory.Click += new System.EventHandler(this.BtnHistory_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1453, 1074);
+            this.Controls.Add(this.BtnHistory);
             this.Controls.Add(this.TxtSearch);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.CbRecursiveSearch);
@@ -235,5 +247,6 @@ namespace View {
         private System.Windows.Forms.CheckBox CbRecursiveSearch;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox TxtSearch;
+        private System.Windows.Forms.Button BtnHistory;
     }
 }
