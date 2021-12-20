@@ -42,6 +42,10 @@ namespace VideoWatcher.View {
                 table.Rows.Add(row);
             }
 
+            var min = list.Min(x => DateTime.Parse(x["Watched"].ToString()));
+            var max = list.Max(x => DateTime.Parse(x["Watched"].ToString()));
+
+            LblPerDay.Text = decimal.Round(((decimal)list.Count / (max - min).Days), 3).ToString();
             DgGrid.DataSource = table;
         }
     }
