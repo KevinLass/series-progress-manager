@@ -24,8 +24,8 @@ namespace VideoWatcher.View {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHistory));
             this.DgGrid = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.LblPerDay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgGrid)).BeginInit();
             this.SuspendLayout();
@@ -46,26 +46,15 @@ namespace VideoWatcher.View {
             this.DgGrid.RowHeadersVisible = false;
             this.DgGrid.RowHeadersWidth = 62;
             this.DgGrid.RowTemplate.Height = 28;
-            this.DgGrid.Size = new System.Drawing.Size(1223, 692);
+            this.DgGrid.Size = new System.Drawing.Size(1223, 675);
             this.DgGrid.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 740);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Episodes per Day:";
             // 
             // LblPerDay
             // 
             this.LblPerDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LblPerDay.AutoSize = true;
-            this.LblPerDay.Location = new System.Drawing.Point(178, 740);
+            this.LblPerDay.Location = new System.Drawing.Point(12, 705);
             this.LblPerDay.Name = "LblPerDay";
             this.LblPerDay.Size = new System.Drawing.Size(0, 20);
             this.LblPerDay.TabIndex = 2;
@@ -76,9 +65,10 @@ namespace VideoWatcher.View {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 810);
             this.Controls.Add(this.LblPerDay);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.DgGrid);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmHistory";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "History";
             this.Load += new System.EventHandler(this.FrmHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgGrid)).EndInit();
@@ -90,7 +80,6 @@ namespace VideoWatcher.View {
         #endregion
 
         private System.Windows.Forms.DataGridView DgGrid;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LblPerDay;
     }
 }

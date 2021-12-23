@@ -209,7 +209,7 @@ namespace View {
         }
 
         private void BtnHistory_Click(object sender, EventArgs e) {
-            new FrmHistory(_videosWatched).Show();
+            new FrmHistory(_videosWatched).Show(this);
         }
     }
 }

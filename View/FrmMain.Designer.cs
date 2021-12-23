@@ -25,6 +25,7 @@ namespace View {
         /// </summary>
         private void InitializeComponent() {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.BtnOpenFile = new System.Windows.Forms.Button();
             this.LblFileName = new System.Windows.Forms.Label();
             this.DgFiles = new System.Windows.Forms.DataGridView();
@@ -98,11 +99,11 @@ namespace View {
             // BtnVlc
             // 
             this.BtnVlc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnVlc.Location = new System.Drawing.Point(1301, 12);
+            this.BtnVlc.Location = new System.Drawing.Point(1306, 12);
             this.BtnVlc.Name = "BtnVlc";
-            this.BtnVlc.Size = new System.Drawing.Size(140, 38);
+            this.BtnVlc.Size = new System.Drawing.Size(135, 38);
             this.BtnVlc.TabIndex = 8;
-            this.BtnVlc.Text = "Start in VLC";
+            this.BtnVlc.Text = "Start Video";
             this.BtnVlc.UseVisualStyleBackColor = true;
             this.BtnVlc.Click += new System.EventHandler(this.BtnVlc_Click);
             // 
@@ -197,7 +198,7 @@ namespace View {
             // 
             // BtnHistory
             // 
-            this.BtnHistory.Location = new System.Drawing.Point(393, 12);
+            this.BtnHistory.Location = new System.Drawing.Point(240, 12);
             this.BtnHistory.Name = "BtnHistory";
             this.BtnHistory.Size = new System.Drawing.Size(135, 37);
             this.BtnHistory.TabIndex = 17;
@@ -221,6 +222,7 @@ namespace View {
             this.Controls.Add(this.BtnVlc);
             this.Controls.Add(this.LblFileName);
             this.Controls.Add(this.BtnOpenFile);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Video Watcher";
