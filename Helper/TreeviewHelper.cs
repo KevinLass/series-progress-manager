@@ -44,12 +44,15 @@ namespace SeriesProgressManager.Helper {
 
             var directoryNode = new TreeNode(directoryInfo.Name);
             try {
-                foreach (var directory in directoryInfo.GetDirectories()) {
-                    directoryNode.Nodes.Add(CreateDirectoryNodeResursive(directory, step + 1));
+                foreach (DirectoryInfo directory in directoryInfo.GetDirectories()) {
+                    if (directory.GetFiles("*.mkv").Any()) {
+                        directoryNode.Nodes.Add(CreateDirectoryNodeResursive(directory, step + 1));
+                    }
                 }
             } catch (Exception ex) {
                 Console.WriteLine("Directory could not be loaded: {0}", ex);
             }
+
             directoryNode.Expand();
             directoryNode.EnsureVisible();
 
