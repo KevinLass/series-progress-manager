@@ -69,6 +69,7 @@ namespace VideoWatcher.View {
         private void FillChart() {
             Chart.Series["Episodes"]["PixelPointWidth"] = "20";
             Chart.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+            Chart.ChartAreas["ChartArea1"].AxisY.Interval = 1;
 
             var dates = new List<DateTime>();
             for (DateTime i = DateTime.Today.AddDays(-30); i <= DateTime.Today; i = i.AddDays(1)) {
