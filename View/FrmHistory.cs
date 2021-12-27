@@ -20,6 +20,8 @@ namespace VideoWatcher.View {
             if (Owner != null) {
                 Location = new Point(Owner.Location.X + Owner.Width / 2 - Width / 2, Owner.Location.Y + Owner.Height / 2 - Height / 2);
             }
+
+            FillChart();
         }
 
         private void ReloadGrid() {
@@ -60,8 +62,23 @@ namespace VideoWatcher.View {
                             + "Average time of the last seven days: " + Trim(avgWeek.TimeOfDay);
         }
 
-        public static TimeSpan Trim(TimeSpan date) {
+        private static TimeSpan Trim(TimeSpan date) {
             return new TimeSpan(date.Hours, date.Minutes, date.Seconds);
+        }
+
+        private void FillChart() {
+            Chart.Series["Episodes"]["PixelPointWidth"] = "20";
+            Chart.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+
+            var dates = new List<DateTime>();
+            for (DateTime i = DateTime.Today.AddDays(-30); i <= DateTime.Today; i = i.AddDays(1)) {
+                dates.Add(i);
+            }
+
+            foreach (DateTime date in dates) {
+                var count = _videosWatched.Where(x => x.Value.Date == date).Count();
+                Chart.Series["Episodes"].Points.AddXY(date.ToString("dd.MM"), count);
+            }
         }
     }
 }
