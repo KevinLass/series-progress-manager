@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using SeriesProgressManager.Helper;
 using VideoWatcher.View;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace View {
     public partial class FrmMain : Form {
-
+        private const string SERIES_PATH = "Path";
         private Dictionary<string, DateTime> _videosWatched;
         private readonly Dictionary<string, string> _settings;
 
@@ -112,7 +114,7 @@ namespace View {
         }
 
         private void BtnClear_Click(object sender, EventArgs e) {
-            if(MessageBox.Show("Do you really want to delete all history?", "Delete History",
+            if (MessageBox.Show("Do you really want to delete all history?", "Delete History",
                MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
                 _videosWatched = new Dictionary<string, DateTime>();
@@ -227,29 +229,35 @@ namespace View {
             if (dialog.ShowDialog() == DialogResult.OK) {
                 if (DgSeries.DataSource == null) {
                     DataTable table = new DataTable();
-                    table.Columns.Add("Count");
                     table.Columns.Add("Series Name");
+                    table.Columns.Add("Count");
+                    table.Columns.Add(SERIES_PATH);
                     DgSeries.DataSource = table;
                 }
                 var dataSource = (DataTable) DgSeries.DataSource;
                 DataRow dr = dataSource.NewRow();
-                dr["Series Name"] = dialog.SelectedPath;
-                //dr["Series Name"] = Path.GetFileName(dialog.SelectedPath);
+                dr["Series Name"] = TrimSting(Path.GetFileName(dialog.SelectedPath));
                 dr["Count"] = Directory.GetFiles(dialog.SelectedPath).Count();
+                dr[SERIES_PATH] = dialog.SelectedPath;
                 dataSource.Rows.Add(dr);
 
                 FileHelper.SaveSeries(dataSource, _seriesPath);
             }
         }
 
+        private string TrimSting(string inString) {
+            return Regex.Replace(inString, @"\[.*?\]", ""); ;
+        }
+
         private void LoadSeries() {
-            if (File.Exists(_seriesPath)) {
+            var table = FileHelper.GetSeries(_seriesPath);
+            if (File.Exists(_seriesPath) && table.Rows.Count != 0) {
                 DgSeries.DataSource =  FileHelper.GetSeries(_seriesPath);
             }
         }
 
         private void DgSeries_DoubleClick(object sender, EventArgs e) {
-            string path = DgSeries.SelectedRows[0].Cells[1].Value as string;
+            string path = DgSeries.SelectedRows[0].Cells[SERIES_PATH].Value as string;
             if (Directory.Exists(path)) {
                 OpenDirectory(path);
             } else {
@@ -258,9 +266,8 @@ namespace View {
         }
 
         private void BtnDelete_Click(object sender, EventArgs e) {
-            if (MessageBox.Show("Do you really want to delete this series?", "Delete Series",
-               MessageBoxButtons.YesNo) == DialogResult.No
-               && DgSeries.SelectedRows.Count == 0) {
+            if (MessageBox.Show("Do you really want to delete this series?", "Delete Series", MessageBoxButtons.YesNo) == DialogResult.No
+            || DgSeries.SelectedRows.Count == 0) {
                return;
             }
 
@@ -268,8 +275,8 @@ namespace View {
                 if (DgSeries.DataSource is DataTable table) {
                     for (int i = 0; i < table.Rows.Count; i++) {
                         DataRow dr = table.Rows[i];
-                        string selectedItemName = DgSeries.SelectedRows[0].Cells[1].Value as string;
-                        if (dr["Series Name"] == selectedItemName) {
+                        string selectedItemName = DgSeries.SelectedRows[0].Cells[SERIES_PATH].Value as string;
+                        if (dr[SERIES_PATH] == selectedItemName) {
                             dr.Delete();
                         }
                     }

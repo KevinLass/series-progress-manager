@@ -45,21 +45,21 @@ namespace VideoWatcher.View {
         }
 
         private void FillStats(List<DataRow> list) {
-            DateTime min = list.Min(x => DateTime.Parse(x["Watched"].ToString()));
-            DateTime max = list.Max(x => DateTime.Parse(x["Watched"].ToString()));
-
-            IEnumerable<DataRow> week = list.Where(x => DateTime.Parse(x["Watched"].ToString()) > DateTime.Now.AddDays(-7));
-
-            IList<DateTime> times = list.Select(x => DateTime.Parse(x["Watched"].ToString())).ToList();
-            IList<DateTime> weekTimes = week.Select(x => DateTime.Parse(x["Watched"].ToString())).ToList();
-
-            DateTime avg = new DateTime((long)times.Select(d => d.TimeOfDay.Ticks).Average());
-            IEnumerable<long> ticks = weekTimes.Select(d => d.TimeOfDay.Ticks);
-            DateTime avgWeek = DateTime.MinValue;
-            if (ticks.Any()) {
-                avgWeek = new DateTime((long)ticks.Average());
-            }
             try {
+                DateTime min = list.Min(x => DateTime.Parse(x["Watched"].ToString()));
+                DateTime max = list.Max(x => DateTime.Parse(x["Watched"].ToString()));
+
+                IEnumerable<DataRow> week = list.Where(x => DateTime.Parse(x["Watched"].ToString()) > DateTime.Now.AddDays(-7));
+
+                IList<DateTime> times = list.Select(x => DateTime.Parse(x["Watched"].ToString())).ToList();
+                IList<DateTime> weekTimes = week.Select(x => DateTime.Parse(x["Watched"].ToString())).ToList();
+
+                DateTime avg = new DateTime((long)times.Select(d => d.TimeOfDay.Ticks).Average());
+                IEnumerable<long> ticks = weekTimes.Select(d => d.TimeOfDay.Ticks);
+                DateTime avgWeek = DateTime.MinValue;
+                if (ticks.Any()) {
+                    avgWeek = new DateTime((long)ticks.Average());
+                }
                 LblPerDay.Text = "Total episodes per day: " + decimal.Round((decimal)list.Count / (max - min).Days, 2).ToString() + Environment.NewLine
                                 + "Average time of the day: " + Trim(avg.TimeOfDay) + Environment.NewLine
                                 + "Episodes in the last seven days: " + decimal.Round((decimal)week.Count() / 7, 2).ToString() + Environment.NewLine

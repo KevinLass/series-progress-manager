@@ -108,6 +108,9 @@ namespace SeriesProgressManager.Helper {
         }
 
         public static DataTable GetSeries(string path) {
+            if (!File.Exists(path)) {
+                return null;
+            }
             using (StreamReader file = File.OpenText(path)) {
                 var ser = new JsonSerializer();
                 return (DataTable) ser.Deserialize(file, typeof(DataTable));
