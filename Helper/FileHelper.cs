@@ -101,5 +101,17 @@ namespace SeriesProgressManager.Helper {
             settings["CurrentlyWatchedFolder"] = newValue;
             SaveSettingDictAsJson(settings, path);
         }
+
+        public static void SaveSeries(DataTable series, string path) {
+            var json = JsonConvert.SerializeObject(series);
+            File.WriteAllText(path, json);
+        }
+
+        public static DataTable GetSeries(string path) {
+            using (StreamReader file = File.OpenText(path)) {
+                var ser = new JsonSerializer();
+                return (DataTable) ser.Deserialize(file, typeof(DataTable));
+            }
+        }
     }
 }

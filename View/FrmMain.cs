@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using SeriesProgressManager.Helper;
 using VideoWatcher.View;
@@ -16,8 +14,15 @@ namespace View {
         private readonly Dictionary<string, string> _settings;
 
         // Execution path
-        private readonly string _watchedVideosPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "WatchedVideos.json");
-        private readonly string _settingsPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "Settings.json");
+        private readonly string _watchedVideosPath = Path.Combine(
+            Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+            "WatchedVideos.json");
+        private readonly string _seriesPath = Path.Combine(
+            Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+            "Series.json");
+        private readonly string _settingsPath = Path.Combine(
+            Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+            "Settings.json");
 
         public FrmMain() {
             InitializeComponent();
@@ -26,6 +31,7 @@ namespace View {
             _settings = FileHelper.GetSettings(_settingsPath);
 
             OpenDirectory(_settings["CurrentlyWatchedFolder"]);
+            LoadSeries();
         }
 
         private void OpenDirectory(string path) {
@@ -210,6 +216,69 @@ namespace View {
 
         private void BtnHistory_Click(object sender, EventArgs e) {
             new FrmHistory(_videosWatched).Show(this);
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e) {
+            var dialog = new FolderBrowserDialog() {
+                ShowNewFolderButton = false,
+                SelectedPath = Directory.Exists(_settings["CurrentlyWatchedFolder"]) ? _settings["CurrentlyWatchedFolder"] : null
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                if (DgSeries.DataSource == null) {
+                    DataTable table = new DataTable();
+                    table.Columns.Add("Count");
+                    table.Columns.Add("Series Name");
+                    DgSeries.DataSource = table;
+                }
+                var dataSource = (DataTable) DgSeries.DataSource;
+                DataRow dr = dataSource.NewRow();
+                dr["Series Name"] = dialog.SelectedPath;
+                //dr["Series Name"] = Path.GetFileName(dialog.SelectedPath);
+                dr["Count"] = Directory.GetFiles(dialog.SelectedPath).Count();
+                dataSource.Rows.Add(dr);
+
+                FileHelper.SaveSeries(dataSource, _seriesPath);
+            }
+        }
+
+        private void LoadSeries() {
+            if (File.Exists(_seriesPath)) {
+                DgSeries.DataSource =  FileHelper.GetSeries(_seriesPath);
+            }
+        }
+
+        private void DgSeries_DoubleClick(object sender, EventArgs e) {
+            string path = DgSeries.SelectedRows[0].Cells[1].Value as string;
+            if (Directory.Exists(path)) {
+                OpenDirectory(path);
+            } else {
+                ShowError("File not found");
+            }
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e) {
+            if (MessageBox.Show("Do you really want to delete this series?", "Delete Series",
+               MessageBoxButtons.YesNo) == DialogResult.No
+               && DgSeries.SelectedRows.Count == 0) {
+               return;
+            }
+
+            try {
+                if (DgSeries.DataSource is DataTable table) {
+                    for (int i = 0; i < table.Rows.Count; i++) {
+                        DataRow dr = table.Rows[i];
+                        string selectedItemName = DgSeries.SelectedRows[0].Cells[1].Value as string;
+                        if (dr["Series Name"] == selectedItemName) {
+                            dr.Delete();
+                        }
+                    }
+                    table.AcceptChanges();
+                    FileHelper.SaveSeries(table, _seriesPath);
+                }
+            } catch (Exception ex) {
+                ShowError("Error while deleting", ex);
+            }
         }
     }
 }

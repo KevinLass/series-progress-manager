@@ -59,11 +59,14 @@ namespace VideoWatcher.View {
             if (ticks.Any()) {
                 avgWeek = new DateTime((long)ticks.Average());
             }
-
-            LblPerDay.Text = "Total episodes per day: " + decimal.Round((decimal)list.Count / (max - min).Days, 2).ToString() + Environment.NewLine
-                            + "Average time of the day: " + Trim(avg.TimeOfDay) + Environment.NewLine
-                            + "Episodes in the last seven days: " + decimal.Round((decimal)week.Count() / 7, 2).ToString() + Environment.NewLine
-                            + "Average time of the last seven days: " + (avgWeek != DateTime.MinValue ? Trim(avgWeek.TimeOfDay).ToString() : "-");
+            try {
+                LblPerDay.Text = "Total episodes per day: " + decimal.Round((decimal)list.Count / (max - min).Days, 2).ToString() + Environment.NewLine
+                                + "Average time of the day: " + Trim(avg.TimeOfDay) + Environment.NewLine
+                                + "Episodes in the last seven days: " + decimal.Round((decimal)week.Count() / 7, 2).ToString() + Environment.NewLine
+                                + "Average time of the last seven days: " + (avgWeek != DateTime.MinValue ? Trim(avgWeek.TimeOfDay).ToString() : "-");
+            } catch (Exception) {
+                LblPerDay.Text = "-";
+            }
         }
 
         private static TimeSpan Trim(TimeSpan date) {
