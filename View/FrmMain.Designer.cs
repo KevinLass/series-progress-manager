@@ -56,7 +56,7 @@ namespace View {
             this.BtnOpenFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnOpenFile.Name = "BtnOpenFile";
             this.BtnOpenFile.Size = new System.Drawing.Size(92, 31);
-            this.BtnOpenFile.TabIndex = 4;
+            this.BtnOpenFile.TabIndex = 0;
             this.BtnOpenFile.Text = "Open";
             this.BtnOpenFile.UseVisualStyleBackColor = true;
             this.BtnOpenFile.Click += new System.EventHandler(this.BtnOpenFile_Click);
@@ -98,7 +98,7 @@ namespace View {
             this.DgFiles.RowTemplate.Height = 28;
             this.DgFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgFiles.Size = new System.Drawing.Size(903, 761);
-            this.DgFiles.TabIndex = 7;
+            this.DgFiles.TabIndex = 0;
             this.DgFiles.DoubleClick += new System.EventHandler(this.DgFiles_DoubleClick);
             this.DgFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgFiles_KeyDown);
             // 
@@ -109,7 +109,7 @@ namespace View {
             this.BtnVlc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnVlc.Name = "BtnVlc";
             this.BtnVlc.Size = new System.Drawing.Size(120, 31);
-            this.BtnVlc.TabIndex = 8;
+            this.BtnVlc.TabIndex = 6;
             this.BtnVlc.Text = "Start Video";
             this.BtnVlc.UseVisualStyleBackColor = true;
             this.BtnVlc.Click += new System.EventHandler(this.BtnVlc_Click);
@@ -121,7 +121,7 @@ namespace View {
             this.BtnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(108, 31);
-            this.BtnClear.TabIndex = 9;
+            this.BtnClear.TabIndex = 5;
             this.BtnClear.Text = "Clear History";
             this.BtnClear.UseVisualStyleBackColor = true;
             this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
@@ -132,7 +132,7 @@ namespace View {
             this.BtnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(100, 31);
-            this.BtnRefresh.TabIndex = 10;
+            this.BtnRefresh.TabIndex = 1;
             this.BtnRefresh.Text = "Refresh";
             this.BtnRefresh.UseVisualStyleBackColor = true;
             this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
@@ -144,7 +144,7 @@ namespace View {
             this.BtnWatched.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnWatched.Name = "BtnWatched";
             this.BtnWatched.Size = new System.Drawing.Size(79, 31);
-            this.BtnWatched.TabIndex = 11;
+            this.BtnWatched.TabIndex = 3;
             this.BtnWatched.Text = "Mark";
             this.BtnWatched.UseVisualStyleBackColor = true;
             this.BtnWatched.Click += new System.EventHandler(this.BtnWatched_Click);
@@ -156,7 +156,7 @@ namespace View {
             this.BtnUnwatched.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnUnwatched.Name = "BtnUnwatched";
             this.BtnUnwatched.Size = new System.Drawing.Size(88, 31);
-            this.BtnUnwatched.TabIndex = 12;
+            this.BtnUnwatched.TabIndex = 4;
             this.BtnUnwatched.Text = "Unmark";
             this.BtnUnwatched.UseVisualStyleBackColor = true;
             this.BtnUnwatched.Click += new System.EventHandler(this.BtnUnwatched_Click);
@@ -219,7 +219,7 @@ namespace View {
             this.DgSeries.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgSeries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgSeries.Location = new System.Drawing.Point(5, 4);
-            this.DgSeries.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DgSeries.Margin = new System.Windows.Forms.Padding(4);
             this.DgSeries.MultiSelect = false;
             this.DgSeries.Name = "DgSeries";
             this.DgSeries.ReadOnly = true;
@@ -227,6 +227,7 @@ namespace View {
             this.DgSeries.RowHeadersWidth = 51;
             this.DgSeries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgSeries.Size = new System.Drawing.Size(355, 347);
+            this.DgSeries.StandardTab = true;
             this.DgSeries.TabIndex = 14;
             this.DgSeries.DoubleClick += new System.EventHandler(this.DgSeries_DoubleClick);
             // 
@@ -245,7 +246,7 @@ namespace View {
             this.BtnHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnHistory.Name = "BtnHistory";
             this.BtnHistory.Size = new System.Drawing.Size(120, 30);
-            this.BtnHistory.TabIndex = 17;
+            this.BtnHistory.TabIndex = 2;
             this.BtnHistory.Text = "Show History";
             this.BtnHistory.UseVisualStyleBackColor = true;
             this.BtnHistory.Click += new System.EventHandler(this.BtnHistory_Click);
@@ -253,10 +254,10 @@ namespace View {
             // BtnAdd
             // 
             this.BtnAdd.Location = new System.Drawing.Point(11, 54);
-            this.BtnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(92, 28);
-            this.BtnAdd.TabIndex = 17;
+            this.BtnAdd.TabIndex = 7;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = true;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
@@ -264,10 +265,10 @@ namespace View {
             // BtnDelete
             // 
             this.BtnDelete.Location = new System.Drawing.Point(108, 53);
-            this.BtnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(100, 28);
-            this.BtnDelete.TabIndex = 18;
+            this.BtnDelete.TabIndex = 8;
             this.BtnDelete.Text = "Delete";
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
