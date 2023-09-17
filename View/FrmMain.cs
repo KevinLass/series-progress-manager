@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using SeriesProgressManager.Helper;
 using VideoWatcher.View;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace View {
     public partial class FrmMain : Form {
@@ -104,14 +104,14 @@ namespace View {
         }
 
         private void BtnOpenFile_Click(object sender, EventArgs e) {
-            var dialog = new FolderBrowserDialog() {
-                ShowNewFolderButton = false,
-                SelectedPath = Directory.Exists(_settings["CurrentlyWatchedFolder"]) ? _settings["CurrentlyWatchedFolder"] : null
+            var dialog = new CommonOpenFileDialog() {
+                IsFolderPicker = true,
+                InitialDirectory = Directory.Exists(_settings["CurrentlyWatchedFolder"]) ? _settings["CurrentlyWatchedFolder"] : null
             };
 
-            if (dialog.ShowDialog() == DialogResult.OK) {
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok) {
 
-                OpenDirectory(dialog.SelectedPath);
+                OpenDirectory(dialog.FileName);
             }
         }
 
@@ -223,12 +223,12 @@ namespace View {
         }
 
         private void BtnAdd_Click(object sender, EventArgs e) {
-            var dialog = new FolderBrowserDialog() {
-                ShowNewFolderButton = false,
-                SelectedPath = Directory.Exists(_settings["CurrentlyWatchedFolder"]) ? _settings["CurrentlyWatchedFolder"] : null
+            var dialog = new CommonOpenFileDialog() {
+                IsFolderPicker = true,
+                InitialDirectory = Directory.Exists(_settings["CurrentlyWatchedFolder"]) ? _settings["CurrentlyWatchedFolder"] : null
             };
 
-            if (dialog.ShowDialog() == DialogResult.OK) {
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok) {
                 if (DgSeries.DataSource == null) {
                     DataTable table = new DataTable();
                     table.Columns.Add("Series Name");
@@ -238,9 +238,9 @@ namespace View {
                 }
                 var dataSource = (DataTable) DgSeries.DataSource;
                 DataRow dr = dataSource.NewRow();
-                dr["Series Name"] = TrimSting(Path.GetFileName(dialog.SelectedPath));
-                dr["Count"] = Directory.GetFiles(dialog.SelectedPath).Count();
-                dr[SERIES_PATH] = dialog.SelectedPath;
+                dr["Series Name"] = TrimSting(Path.GetFileName(dialog.FileName));
+                dr["Count"] = Directory.GetFiles(dialog.FileName).Count();
+                dr[SERIES_PATH] = dialog.FileName;
                 dataSource.Rows.Add(dr);
 
                 FileHelper.SaveSeries(dataSource, _seriesPath);
