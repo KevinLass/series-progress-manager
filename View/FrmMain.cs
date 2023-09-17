@@ -36,6 +36,26 @@ namespace View {
             LoadSeries();
 
             DgFiles.Select();
+
+            ChooseNewestEpisode();
+        }
+
+        private void ChooseNewestEpisode() {
+            try {
+                if (DgFiles.DataSource is DataTable table) {
+                    for (int i = 0; i < table.Rows.Count; i++) {
+                        DataRow dr = table.Rows[i];
+                        if (string.IsNullOrWhiteSpace(dr["Watched"].ToString()) && i < table.Rows.Count) {
+                            DgFiles.ClearSelection();
+                            DgFiles.Rows[i].Selected = true;
+                            DgFiles.CurrentCell = DgFiles.Rows[i].Cells[0];
+                            return;
+                        }
+                    }
+                }
+            } catch (Exception) {
+                // unimportant feature, so no error should be thrown
+            }
         }
 
         private void OpenDirectory(string path) {
