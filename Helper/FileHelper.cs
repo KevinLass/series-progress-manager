@@ -58,7 +58,7 @@ namespace SeriesProgressManager.Helper {
             table.Columns.Add("File Name");
             foreach (var file in files) {
                 FileInfo info = new FileInfo(file);
-                if (info.Extension == ".mkv" || info.Extension == ".vlc") {
+                if (info.Extension == ".mkv" || info.Extension == ".vlc" || info.Extension == ".mp4") {
                     DataRow dr = table.NewRow();
                     dr["File Name"] = info.Name;
                     table.Rows.Add(dr);
