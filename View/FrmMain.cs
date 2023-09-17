@@ -272,12 +272,14 @@ namespace View {
             }
 
             try {
+                string selectedItemName = DgSeries.SelectedRows[0].Cells[SERIES_PATH].Value as string;
+
                 if (DgSeries.DataSource is DataTable table) {
                     for (int i = 0; i < table.Rows.Count; i++) {
                         DataRow dr = table.Rows[i];
-                        string selectedItemName = DgSeries.SelectedRows[0].Cells[SERIES_PATH].Value as string;
-                        if (dr[SERIES_PATH] == selectedItemName) {
+                        if (dr[SERIES_PATH].ToString() == selectedItemName) {
                             dr.Delete();
+                            break;
                         }
                     }
                     table.AcceptChanges();
