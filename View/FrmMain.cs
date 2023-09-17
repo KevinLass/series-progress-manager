@@ -34,6 +34,8 @@ namespace View {
 
             OpenDirectory(_settings["CurrentlyWatchedFolder"]);
             LoadSeries();
+
+            DgFiles.Select();
         }
 
         private void OpenDirectory(string path) {

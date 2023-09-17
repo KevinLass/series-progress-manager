@@ -56,7 +56,7 @@ namespace View {
             this.BtnOpenFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnOpenFile.Name = "BtnOpenFile";
             this.BtnOpenFile.Size = new System.Drawing.Size(92, 31);
-            this.BtnOpenFile.TabIndex = 0;
+            this.BtnOpenFile.TabIndex = 1;
             this.BtnOpenFile.Text = "Open";
             this.BtnOpenFile.UseVisualStyleBackColor = true;
             this.BtnOpenFile.Click += new System.EventHandler(this.BtnOpenFile_Click);
@@ -67,7 +67,7 @@ namespace View {
             this.LblFileName.Location = new System.Drawing.Point(375, 59);
             this.LblFileName.Name = "LblFileName";
             this.LblFileName.Size = new System.Drawing.Size(11, 16);
-            this.LblFileName.TabIndex = 6;
+            this.LblFileName.TabIndex = 0;
             this.LblFileName.Text = "-";
             // 
             // DgFiles
@@ -110,7 +110,7 @@ namespace View {
             this.BtnVlc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnVlc.Name = "BtnVlc";
             this.BtnVlc.Size = new System.Drawing.Size(120, 31);
-            this.BtnVlc.TabIndex = 6;
+            this.BtnVlc.TabIndex = 7;
             this.BtnVlc.Text = "Start Video";
             this.BtnVlc.UseVisualStyleBackColor = true;
             this.BtnVlc.Click += new System.EventHandler(this.BtnVlc_Click);
@@ -122,7 +122,7 @@ namespace View {
             this.BtnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(108, 31);
-            this.BtnClear.TabIndex = 5;
+            this.BtnClear.TabIndex = 6;
             this.BtnClear.Text = "Clear History";
             this.BtnClear.UseVisualStyleBackColor = true;
             this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
@@ -133,7 +133,7 @@ namespace View {
             this.BtnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(100, 31);
-            this.BtnRefresh.TabIndex = 1;
+            this.BtnRefresh.TabIndex = 2;
             this.BtnRefresh.Text = "Refresh";
             this.BtnRefresh.UseVisualStyleBackColor = true;
             this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
@@ -145,7 +145,7 @@ namespace View {
             this.BtnWatched.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnWatched.Name = "BtnWatched";
             this.BtnWatched.Size = new System.Drawing.Size(79, 31);
-            this.BtnWatched.TabIndex = 3;
+            this.BtnWatched.TabIndex = 4;
             this.BtnWatched.Text = "Mark";
             this.BtnWatched.UseVisualStyleBackColor = true;
             this.BtnWatched.Click += new System.EventHandler(this.BtnWatched_Click);
@@ -157,7 +157,7 @@ namespace View {
             this.BtnUnwatched.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnUnwatched.Name = "BtnUnwatched";
             this.BtnUnwatched.Size = new System.Drawing.Size(88, 31);
-            this.BtnUnwatched.TabIndex = 4;
+            this.BtnUnwatched.TabIndex = 5;
             this.BtnUnwatched.Text = "Unmark";
             this.BtnUnwatched.UseVisualStyleBackColor = true;
             this.BtnUnwatched.Click += new System.EventHandler(this.BtnUnwatched_Click);
@@ -171,7 +171,7 @@ namespace View {
             this.TvFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TvFiles.Name = "TvFiles";
             this.TvFiles.Size = new System.Drawing.Size(361, 347);
-            this.TvFiles.TabIndex = 13;
+            this.TvFiles.TabIndex = 1;
             this.TvFiles.DoubleClick += new System.EventHandler(this.TvFiles_DoubleClick);
             // 
             // CbRecursiveSearch
@@ -181,7 +181,7 @@ namespace View {
             this.CbRecursiveSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CbRecursiveSearch.Name = "CbRecursiveSearch";
             this.CbRecursiveSearch.Size = new System.Drawing.Size(84, 20);
-            this.CbRecursiveSearch.TabIndex = 14;
+            this.CbRecursiveSearch.TabIndex = 2;
             this.CbRecursiveSearch.Text = "recursive";
             this.CbRecursiveSearch.UseVisualStyleBackColor = true;
             // 
@@ -206,7 +206,7 @@ namespace View {
             this.splitContainer1.Panel2.Controls.Add(this.DgFiles);
             this.splitContainer1.Size = new System.Drawing.Size(1271, 761);
             this.splitContainer1.SplitterDistance = 364;
-            this.splitContainer1.TabIndex = 15;
+            this.splitContainer1.TabIndex = 0;
             // 
             // DgSeries
             // 
@@ -229,7 +229,7 @@ namespace View {
             this.DgSeries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgSeries.Size = new System.Drawing.Size(355, 347);
             this.DgSeries.StandardTab = true;
-            this.DgSeries.TabIndex = 14;
+            this.DgSeries.TabIndex = 0;
             this.DgSeries.DoubleClick += new System.EventHandler(this.DgSeries_DoubleClick);
             // 
             // TxtSearch
@@ -247,7 +247,7 @@ namespace View {
             this.BtnHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnHistory.Name = "BtnHistory";
             this.BtnHistory.Size = new System.Drawing.Size(120, 30);
-            this.BtnHistory.TabIndex = 2;
+            this.BtnHistory.TabIndex = 3;
             this.BtnHistory.Text = "Show History";
             this.BtnHistory.UseVisualStyleBackColor = true;
             this.BtnHistory.Click += new System.EventHandler(this.BtnHistory_Click);
@@ -258,7 +258,7 @@ namespace View {
             this.BtnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(92, 28);
-            this.BtnAdd.TabIndex = 7;
+            this.BtnAdd.TabIndex = 8;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = true;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
@@ -269,7 +269,7 @@ namespace View {
             this.BtnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(100, 28);
-            this.BtnDelete.TabIndex = 8;
+            this.BtnDelete.TabIndex = 9;
             this.BtnDelete.Text = "Delete";
             this.BtnDelete.UseVisualStyleBackColor = true;
             this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
