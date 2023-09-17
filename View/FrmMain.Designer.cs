@@ -98,6 +98,7 @@ namespace View {
             this.DgFiles.RowTemplate.Height = 28;
             this.DgFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgFiles.Size = new System.Drawing.Size(903, 761);
+            this.DgFiles.StandardTab = true;
             this.DgFiles.TabIndex = 0;
             this.DgFiles.DoubleClick += new System.EventHandler(this.DgFiles_DoubleClick);
             this.DgFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgFiles_KeyDown);
